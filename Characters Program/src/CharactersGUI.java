@@ -10,5 +10,30 @@ public class CharactersGUI extends GBFrame {
 		frm.setVisible(true);
 	}
 
+	JLabel inputLabel = addLabel("Input a string of words", 1,1,3,1);
+	JTextField inputField = addTextField("", 2,1,3,1);
+	JButton inputButton = addButton("Input",3,1,1,1);
+	JButton clearButton = addButton("Clear",3,2,1,1);
+	JButton exitButton = addButton("Exit",3,3,1,1);
+	JLabel numofcharacters = addLabel("",4,1,3,1);
+	JLabel numofwords = addLabel("",5,1,3,1);
 	
+	String input;
+	Characters character = new Characters();
+	
+	public void buttonClicked(JButton buttonObj) {
+		if (buttonObj == inputButton) {
+			input = inputField.getText();
+			
+			newinput = character.removeExtraSpaces(input);
+		}
+		
+		if(buttonObj == clearButton) {
+			inputField.setText("");
+		}
+		 
+		if (buttonObj == exitButton) {
+			System.exit(1);
+		}
+	}
 }
