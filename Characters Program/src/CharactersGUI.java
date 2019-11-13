@@ -31,6 +31,11 @@ public class CharactersGUI extends GBFrame {
 			
 			numofcharactersLabel.setText(numofchar + " characters");
 			numofwordsLabel.setText(numofwords + " words");
+			
+			String[] words = new String[numofwords];
+			words = character.findWords(newinput, numofwords);
+			
+			
 		}
 		
 		if(buttonObj == clearButton) {

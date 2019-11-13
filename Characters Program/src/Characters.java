@@ -38,4 +38,19 @@ public class Characters {
 		return counter;
 	}
 	
+	public String[] findWords (String str, int num) {
+		String[] words = new String[num];
+		int counter = 0;
+		for (int j = 0; j < str.length(); j++) {
+			if (str.charAt(j) == ' ')
+				counter++;
+			else {
+				words[counter] = words[counter].concat(str.charAt(j) + "");
+				
+			}
+		}
+		
+		return words;
+	}
+	
 }
