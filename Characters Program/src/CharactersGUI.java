@@ -25,7 +25,8 @@ public class CharactersGUI extends GBFrame {
 		if (buttonObj == inputButton) {
 			input = inputField.getText();
 			
-			newinput = character.removeExtraSpaces(input);
+			String newinput = character.removeExtraSpaces(input);
+			System.out.print(newinput);
 		}
 		
 		if(buttonObj == clearButton) {
