@@ -15,8 +15,8 @@ public class CharactersGUI extends GBFrame {
 	JButton inputButton = addButton("Input",3,1,1,1);
 	JButton clearButton = addButton("Clear",3,2,1,1);
 	JButton exitButton = addButton("Exit",3,3,1,1);
-	JLabel numofcharacters = addLabel("",4,1,3,1);
-	JLabel numofwords = addLabel("",5,1,3,1);
+	JLabel numofcharactersLabel = addLabel("",4,1,3,1);
+	JLabel numofwordsLabel = addLabel("",5,1,3,1);
 	
 	String input;
 	Characters character = new Characters();
@@ -26,7 +26,11 @@ public class CharactersGUI extends GBFrame {
 			input = inputField.getText();
 			
 			String newinput = character.removeExtraSpaces(input);
-			System.out.print(newinput);
+			int numofchar = character.numofCharacters(newinput);
+			int numofwords = character.numofWords(newinput);
+			
+			numofcharactersLabel.setText(numofchar + " characters");
+			numofwordsLabel.setText(numofwords + " words");
 		}
 		
 		if(buttonObj == clearButton) {
