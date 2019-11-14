@@ -57,6 +57,42 @@ public class Characters {
 		return words;
 	}
 	
+	public String[] noRepeats (String[] input, int num) {
+		int counter = 0;
+		
+		boolean[] isrpt = new boolean[num];
+		
+		for (int j = 0; j < input.length; j++) {
+			for (int i = 0; i < input.length; i++) {
+				if (input[j] == input[i])
+					counter++;
+			}
+			if (counter > 1)
+				isrpt[j] = true;
+			
+			counter = 0;
+		}
+		int newstrcount = num;
+		for(int k = 0; k < isrpt.length; k++) {
+			if (isrpt[k] == true)
+				newstrcount--;
+		}
+		
+		//new method start
+		
+		String[] newstr = new String[newstrcount];
+		int count = 0;
+		for(int h = 0; h < isrpt.length; h++) {
+			if (isrpt[h] == false) {
+				newstr[count] = input[h];
+				count++;
+			}
+		}
+		
+		return newstr;
+		
+	}
+	
 	public int wordCounter (String[] str, String word) {
 		int counter = 0;
 		

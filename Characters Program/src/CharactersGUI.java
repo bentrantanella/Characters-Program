@@ -39,9 +39,9 @@ public class CharactersGUI extends GBFrame {
 			int[] wordcount = new int[numofwords];
 			
 			for (int x = 0; x < words.length; x++) {
+				
 				wordcount[x] = character.wordCounter(words, words[x]);
-				wordcounterLabel[x] = addLabel(words[x] + "    " + wordcount[x], 6 + x, 1,3,1);
-				revalidate();
+				
 			}
 			
 		}
@@ -49,7 +49,7 @@ public class CharactersGUI extends GBFrame {
 		if(buttonObj == clearButton) {
 			inputField.setText("");
 		}
-		 
+		 ;
 		if (buttonObj == exitButton) {
 			System.exit(1);
 		}
