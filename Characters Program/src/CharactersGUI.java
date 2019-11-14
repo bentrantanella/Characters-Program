@@ -34,7 +34,15 @@ public class CharactersGUI extends GBFrame {
 			
 			String[] words = new String[numofwords];
 			words = character.findWords(newinput, numofwords);
+			JLabel[] wordcounterLabel = new JLabel[numofwords];
 			
+			int[] wordcount = new int[numofwords];
+			
+			for (int x = 0; x < words.length; x++) {
+				wordcount[x] = character.wordCounter(words, words[x]);
+				wordcounterLabel[x] = addLabel(words[x] + "    " + wordcount[x], 6 + x, 1,3,1);
+				revalidate();
+			}
 			
 		}
 		

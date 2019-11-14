@@ -40,17 +40,31 @@ public class Characters {
 	
 	public String[] findWords (String str, int num) {
 		String[] words = new String[num];
-		int counter = 0;
+		int counter = 0, start = 0, end = 0;
 		for (int j = 0; j < str.length(); j++) {
-			if (str.charAt(j) == ' ')
+			if (j == str.length() - 1) {
+				words[counter] = str.substring(start);
+				break;
+			}
+			if (str.charAt(j) == ' ') {
+				end = j;
+				words[counter] = str.substring(start, end);
+				start = end + 1;
 				counter++;
-			else {
-				words[counter] = words[counter].concat(str.charAt(j) + "");
-				
 			}
 		}
 		
 		return words;
 	}
 	
+	public int wordCounter (String[] str, String word) {
+		int counter = 0;
+		
+		for (int j = 0; j < str.length; j++) {
+			if (str[j] == word)
+				counter++;
+		}
+		
+		return counter;
+	}
 }
