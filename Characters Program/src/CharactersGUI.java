@@ -6,7 +6,7 @@ public class CharactersGUI extends GBFrame {
 	public static void main(String[] args) {
 		JFrame frm = new CharactersGUI();
 		frm.setTitle("Longest Non-Decreasing Sequence");
-		frm.setSize(300, 300);
+		frm.setSize(400, 400);
 		frm.setVisible(true);
 	}
 
@@ -36,13 +36,26 @@ public class CharactersGUI extends GBFrame {
 			words = character.findWords(newinput, numofwords);
 			JLabel[] wordcounterLabel = new JLabel[numofwords];
 			
-			int[] wordcount = new int[numofwords];
+			String[] norepeats = new String[numofwords];
 			
-			for (int x = 0; x < words.length; x++) {
+			norepeats = character.noRPT(norepeats, words);
+			int counter = 0;
+			for(int j = 0; j < norepeats.length; j++) {
+				if (norepeats[j] == null)
+					break;
 				
-				wordcount[x] = character.wordCounter(words, words[x]);
+				for(int i = 0; i < words.length; i++) {
+					if (norepeats[j].equals(words[i]) == true )
+						counter++;
+				}
 				
+				wordcounterLabel[j] = addLabel(norepeats[j] + "   " + counter, 6 + j, 1,3,1);
+				revalidate();
+			
+				counter = 0;
 			}
+			
+			
 			
 		}
 		

@@ -1,5 +1,6 @@
 
 public class Characters {
+	
 	public String removeExtraSpaces (String input) {
 		String newstring = "";
 		
@@ -57,50 +58,60 @@ public class Characters {
 		return words;
 	}
 	
-	public String[] noRepeats (String[] input, int num) {
-		int counter = 0;
-		
-		boolean[] isrpt = new boolean[num];
-		
-		for (int j = 0; j < input.length; j++) {
-			for (int i = 0; i < input.length; i++) {
-				if (input[j] == input[i])
-					counter++;
-			}
-			if (counter > 1)
-				isrpt[j] = true;
-			
-			counter = 0;
-		}
-		int newstrcount = num;
-		for(int k = 0; k < isrpt.length; k++) {
-			if (isrpt[k] == true)
-				newstrcount--;
-		}
-		
-		//new method start
-		
-		String[] newstr = new String[newstrcount];
+	public String[] noRPT (String[] norpt, String[] words) {
+		norpt[0] = words[0];
 		int count = 0;
-		for(int h = 0; h < isrpt.length; h++) {
-			if (isrpt[h] == false) {
-				newstr[count] = input[h];
+		
+		for(int j = 1; j < words.length; j++) {
+			boolean find = false;
+			
+			for(int k = 0; k < count; k++) {
+				if (words[j].equals(norpt[k]) == true) {
+					find = true;
+					
+				}
+			}
+			if (find == false) {
 				count++;
+				norpt[count] = words[j];
 			}
 		}
 		
-		return newstr;
-		
+		return norpt;
 	}
 	
-	public int wordCounter (String[] str, String word) {
-		int counter = 0;
-		
-		for (int j = 0; j < str.length; j++) {
-			if (str[j] == word)
-				counter++;
-		}
-		
-		return counter;
-	}
+//	public boolean[] isRepeat (String[] input, boolean[] isrpt) {
+//		int counter = 0;
+//		
+//		for (int j = 0; j < input.length; j++) {
+//			for (int i = 0; i < input.length; i++) {
+//				if (input[j] == input[i])
+//					counter++;
+//			}
+//			if (counter > 1)
+//				isrpt[j] = true;
+//			
+//			counter = 0;
+//		}
+//		return isrpt;
+//	}
+	
+//	public int norptSize (boolean[] isrpt, int num) {
+//		int newstrcount = num;
+//		for(int k = 0; k < isrpt.length; k++) {
+//			if (isrpt[k] == true)
+//				newstrcount--;
+//		}
+//		return newstrcount;
+//	}
+	
+//	public String[] noRepeats (String[] isrpt, String[] words, boolean[] rpt) {
+//		for (int j = 0; j < words.length; j++) {
+//			if (rpt[j] == true) {
+//				
+//			}
+//		}
+//		
+//		return isrpt;
+//	}
 }
