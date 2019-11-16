@@ -34,6 +34,7 @@ public class Characters {
 		for (int x = 0; x < str.length(); x++) {
 			if (str.charAt(x) == ' ')
 				counter++;
+			
 		}
 		
 		return counter;
@@ -44,13 +45,21 @@ public class Characters {
 		int counter = 0, start = 0, end = 0;
 		for (int j = 0; j < str.length(); j++) {
 			if (j == str.length() - 1) {
-				words[counter] = str.substring(start);
+				if (str.charAt(str.length() - 1)=='.' || str.charAt(str.length() - 1)=='?' || str.charAt(str.length() - 1)=='!') {
+					words[counter] = str.substring(start, str.length() - 1);
+				} else words[counter] = str.substring(start);
 				break;
 			}
 			if (str.charAt(j) == ' ') {
 				end = j;
-				words[counter] = str.substring(start, end);
-				start = end + 1;
+				if (str.charAt(end - 1)=='.' || str.charAt(end - 1)=='?' || str.charAt(end - 1)=='!') {
+					end--;
+					words[counter] = str.substring(start, end);
+					start = end + 2;
+				} else {
+					words[counter] = str.substring(start, end);
+					start = end + 1;
+				}
 				counter++;
 			}
 		}
@@ -64,11 +73,12 @@ public class Characters {
 		
 		for(int j = 1; j < words.length; j++) {
 			boolean find = false;
+			if (words[j].contentEquals("") == true)
+				continue;
 			
-			for(int k = 0; k < count; k++) {
+			for(int k = 0; k <= count; k++) {
 				if (words[j].equals(norpt[k]) == true) {
 					find = true;
-					
 				}
 			}
 			if (find == false) {
@@ -80,38 +90,9 @@ public class Characters {
 		return norpt;
 	}
 	
-//	public boolean[] isRepeat (String[] input, boolean[] isrpt) {
-//		int counter = 0;
-//		
-//		for (int j = 0; j < input.length; j++) {
-//			for (int i = 0; i < input.length; i++) {
-//				if (input[j] == input[i])
-//					counter++;
-//			}
-//			if (counter > 1)
-//				isrpt[j] = true;
-//			
-//			counter = 0;
-//		}
-//		return isrpt;
-//	}
-	
-//	public int norptSize (boolean[] isrpt, int num) {
-//		int newstrcount = num;
-//		for(int k = 0; k < isrpt.length; k++) {
-//			if (isrpt[k] == true)
-//				newstrcount--;
-//		}
-//		return newstrcount;
-//	}
-	
-//	public String[] noRepeats (String[] isrpt, String[] words, boolean[] rpt) {
-//		for (int j = 0; j < words.length; j++) {
-//			if (rpt[j] == true) {
-//				
-//			}
-//		}
-//		
-//		return isrpt;
-//	}
+	public void errorCheck (int num) throws InvalidInput {
+		if (num == 0) {
+			throw new InvalidInput("You must enter a string of words");
+		}
+	}
 }

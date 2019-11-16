@@ -18,31 +18,63 @@ public class CharactersGUI extends GBFrame {
 	JLabel numofcharactersLabel = addLabel("",4,1,3,1);
 	JLabel numofwordsLabel = addLabel("",5,1,3,1);
 	
+	public CharactersGUI() {
+		clearButton.setEnabled(false);
+	}
 	String input;
 	Characters character = new Characters();
+	JLabel[] wordcounterLabel;
 	
 	public void buttonClicked(JButton buttonObj) {
 		if (buttonObj == inputButton) {
+			
 			input = inputField.getText();
 			
 			String newinput = character.removeExtraSpaces(input);
 			int numofchar = character.numofCharacters(newinput);
+			try {
+				character.errorCheck(numofchar);
+			} catch (InvalidInput e) {
+				messageBox(e.getMessage());
+				inputField.setText("");
+				return;
+			}
+			clearButton.setEnabled(true);
 			int numofwords = character.numofWords(newinput);
 			
 			numofcharactersLabel.setText(numofchar + " characters");
-			numofwordsLabel.setText(numofwords + " words");
 			
 			String[] words = new String[numofwords];
 			words = character.findWords(newinput, numofwords);
-			JLabel[] wordcounterLabel = new JLabel[numofwords];
 			
-			String[] norepeats = new String[numofwords];
+			int realwords = 0;
+			for (int b = 0; b < words.length; b++) {
+				if (words[b].equals("") == false)
+						realwords++;
+			}
 			
-			norepeats = character.noRPT(norepeats, words);
+			if (realwords == 1)
+				numofwordsLabel.setText(realwords + " word");
+			else numofwordsLabel.setText(realwords + " words");
+			
+			String[] newwords = new String[realwords];
+			int bounter = 0;
+			for(int c = 0; c < words.length; c++) {
+				if (words[c].contentEquals("") == false) {
+					newwords[bounter] = words[c];
+					bounter++;
+				}
+			}
+			
+			String[] norepeats = new String[realwords];
+			
+			norepeats = character.noRPT(norepeats, newwords);
+			
+			wordcounterLabel = new JLabel[norepeats.length];
 			int counter = 0;
 			for(int j = 0; j < norepeats.length; j++) {
-				if (norepeats[j] == null)
-					break;
+				if (norepeats[j] == null || norepeats[j].contentEquals("") == true)
+					continue;
 				
 				for(int i = 0; i < words.length; i++) {
 					if (norepeats[j].equals(words[i]) == true )
@@ -54,15 +86,19 @@ public class CharactersGUI extends GBFrame {
 			
 				counter = 0;
 			}
-			
-			
-			
 		}
 		
 		if(buttonObj == clearButton) {
 			inputField.setText("");
+			numofcharactersLabel.setText("");
+			numofwordsLabel.setText("");
+			
+			for (int j = 0; j < wordcounterLabel.length; j++) {
+				wordcounterLabel[j].setText("");
+				revalidate();
+			}
 		}
-		 ;
+		
 		if (buttonObj == exitButton) {
 			System.exit(1);
 		}
