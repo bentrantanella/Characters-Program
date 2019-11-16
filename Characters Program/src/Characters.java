@@ -7,10 +7,10 @@ public class Characters {
 		input = input.trim();
 		
 		for (int j = 0; j < input.length(); j++) {
-			if (input.charAt(j) != ' ')
+			if (input.charAt(j) != ' ' || input.charAt(j) != '\t')
 				newstring = newstring.concat(input.charAt(j) + "");
 				
-			if (input.charAt(j) == ' ' && input.charAt(j + 1) != ' ')
+			if ((input.charAt(j) == ' ' || input.charAt(j) == '\t') && (input.charAt(j + 1) != ' ' || input.charAt(j) != '\t'))
 				newstring = newstring.concat(input.charAt(j) + "");
 		}
 		
@@ -21,7 +21,7 @@ public class Characters {
 		int counter = 0;
 		
 		for (int x = 0; x < str.length(); x++) {
-			if (str.charAt(x) != ' ')
+			if (str.charAt(x) != ' ' && str.charAt(x) != '\t')
 				counter++;
 		}
 		
@@ -32,7 +32,7 @@ public class Characters {
 		int counter = 1;
 		
 		for (int x = 0; x < str.length(); x++) {
-			if (str.charAt(x) == ' ')
+			if (str.charAt(x) == ' ' || str.charAt(x) == '\t')
 				counter++;
 			
 		}
@@ -50,7 +50,7 @@ public class Characters {
 				} else words[counter] = str.substring(start);
 				break;
 			}
-			if (str.charAt(j) == ' ') {
+			if (str.charAt(j) == ' ' || str.charAt(j) == '\t') {
 				end = j;
 				if (str.charAt(end - 1)=='.' || str.charAt(end - 1)=='?' || str.charAt(end - 1)=='!') {
 					end--;

@@ -65,7 +65,8 @@ public class CharactersGUI extends GBFrame {
 					bounter++;
 				}
 			}
-			
+			if (realwords == 0)
+				return;
 			String[] norepeats = new String[realwords];
 			
 			norepeats = character.noRPT(norepeats, newwords);
@@ -92,10 +93,13 @@ public class CharactersGUI extends GBFrame {
 			inputField.setText("");
 			numofcharactersLabel.setText("");
 			numofwordsLabel.setText("");
-			
-			for (int j = 0; j < wordcounterLabel.length; j++) {
-				wordcounterLabel[j].setText("");
-				revalidate();
+			try {
+				for (int j = 0; j < wordcounterLabel.length; j++) {
+					wordcounterLabel[j].setText("");
+					revalidate();
+				}
+			} catch (Exception e) {
+				return;
 			}
 		}
 		
