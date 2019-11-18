@@ -15,18 +15,19 @@ public class CharactersGUI extends GBFrame {
 	JButton inputButton = addButton("Input",3,1,1,1);
 	JButton clearButton = addButton("Clear",3,2,1,1);
 	JButton exitButton = addButton("Exit",3,3,1,1);
-	JLabel numofcharactersLabel = addLabel("",4,1,3,1);
-	JLabel numofwordsLabel = addLabel("",5,1,3,1);
+	JTextArea outputArea = addTextArea("", 6,1,3,5);
 	
 	public CharactersGUI() {
 		clearButton.setEnabled(false);
 	}
 	String input;
 	Characters character = new Characters();
-	JLabel[] wordcounterLabel;
 	
+	int inputcounter = 0;
 	public void buttonClicked(JButton buttonObj) {
 		if (buttonObj == inputButton) {
+			outputArea.setText("");
+			String output = "";
 			
 			input = inputField.getText();
 			
@@ -42,7 +43,7 @@ public class CharactersGUI extends GBFrame {
 			clearButton.setEnabled(true);
 			int numofwords = character.numofWords(newinput);
 			
-			numofcharactersLabel.setText(numofchar + " characters");
+			output = output.concat(numofchar + " characters" + "\n");
 			
 			String[] words = new String[numofwords];
 			words = character.findWords(newinput, numofwords);
@@ -54,8 +55,8 @@ public class CharactersGUI extends GBFrame {
 			}
 			
 			if (realwords == 1)
-				numofwordsLabel.setText(realwords + " word");
-			else numofwordsLabel.setText(realwords + " words");
+				output = output.concat(realwords + " word" + "\n");
+			else output = output.concat(realwords + " words" + "\n");
 			
 			String[] newwords = new String[realwords];
 			int bounter = 0;
@@ -70,8 +71,7 @@ public class CharactersGUI extends GBFrame {
 			String[] norepeats = new String[realwords];
 			
 			norepeats = character.noRPT(norepeats, newwords);
-			
-			wordcounterLabel = new JLabel[norepeats.length];
+
 			int counter = 0;
 			for(int j = 0; j < norepeats.length; j++) {
 				if (norepeats[j] == null || norepeats[j].contentEquals("") == true)
@@ -81,26 +81,17 @@ public class CharactersGUI extends GBFrame {
 					if (norepeats[j].equals(words[i]) == true )
 						counter++;
 				}
-				
-				wordcounterLabel[j] = addLabel(norepeats[j] + "   " + counter, 6 + j, 1,3,1);
-				revalidate();
-			
+				output = output.concat(norepeats[j] + "    " + counter + "\n");
 				counter = 0;
 			}
+			
+			outputArea.setText(output);
 		}
 		
 		if(buttonObj == clearButton) {
 			inputField.setText("");
-			numofcharactersLabel.setText("");
-			numofwordsLabel.setText("");
-			try {
-				for (int j = 0; j < wordcounterLabel.length; j++) {
-					wordcounterLabel[j].setText("");
-					revalidate();
-				}
-			} catch (Exception e) {
-				return;
-			}
+			outputArea.setText("");
+			clearButton.setEnabled(false);
 		}
 		
 		if (buttonObj == exitButton) {

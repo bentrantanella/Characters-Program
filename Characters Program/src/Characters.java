@@ -47,6 +47,7 @@ public class Characters {
 			if (j == str.length() - 1) {
 				if (str.charAt(str.length() - 1)=='.' || str.charAt(str.length() - 1)=='?' || str.charAt(str.length() - 1)=='!') {
 					words[counter] = str.substring(start, str.length() - 1);
+					words[counter] = words[counter].toLowerCase();
 				} else words[counter] = str.substring(start);
 				break;
 			}
@@ -55,9 +56,11 @@ public class Characters {
 				if (str.charAt(end - 1)=='.' || str.charAt(end - 1)=='?' || str.charAt(end - 1)=='!') {
 					end--;
 					words[counter] = str.substring(start, end);
+					words[counter] = words[counter].toLowerCase();
 					start = end + 2;
 				} else {
 					words[counter] = str.substring(start, end);
+					words[counter] = words[counter].toLowerCase();
 					start = end + 1;
 				}
 				counter++;
